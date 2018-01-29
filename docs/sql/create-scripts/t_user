@@ -1,0 +1,28 @@
+DROP TABLE IF EXISTS t_user;
+CREATE TABLE t_user
+(
+  id             BIGINT PRIMARY KEY, #主键
+  username       VARCHAR(50) NOT NULL, #用户名
+  nickname       VARCHAR(50), #昵称
+  passwordhash   VARCHAR(50) NOT NULL, #通过PasswordSalt混淆加密后的密码散列码
+  passwordsalt   VARCHAR(50) NOT NULL, #混淆码
+  gender         INTEGER, #性别 0 女 1 男
+  status         INTEGER DEFAULT 0, #状态 -1删除 0正常 1锁定
+  cellphone      VARCHAR(20), #移动电话
+  identitycard   VARCHAR(30), #身份证号码
+  email          VARCHAR(20), #邮件
+  qq             VARCHAR(20), #QQ
+  address        VARCHAR(100), #地址
+  deptid         BIGINT, #部门ID
+
+  createdate     DATETIME,
+  createusername VARCHAR(50),
+  modifydate     DATETIME,
+  modifyusername VARCHAR(50)
+);
+
+# 添加系统管理员 admin 123123
+INSERT INTO `purchase`.`t_user` (`id`, `username`, `nickname`, `passwordhash`, `passwordsalt`, `gender`, `status`)
+VALUES
+  ('403944351954108416', 'admin', '系统管理员', 'de8851b65b0b703a341acc25087eeb3c', 'd133c9a9-525a-4128-88fc-1665f552b31d',
+   '1', '0');

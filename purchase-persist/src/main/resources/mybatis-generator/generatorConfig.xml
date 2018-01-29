@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+    <!-- 配置文件路径 -->
+    <properties resource="mybatis-generator/generatorConfig.properties"/>
+    <!-- 指定数据连接驱动jar地址 -->
+    <classPathEntry  location="${drive.class.path}" />
+    <!-- 一个数据库一个context -->
+    <context id="DB2Tables" targetRuntime="MyBatis3" defaultModelType="flat">
+        <property name="beginningDelimiter" value="`"/>
+        <property name="endingDelimiter" value="`"/>
+
+        <commentGenerator>
+            <!-- 是否生成注释代时间戳-->
+            <property name="suppressDate" value="false"/>
+            <!-- 是否取消注释 -->
+            <property name="suppressAllComments" value="true"/>
+        </commentGenerator>
+
+        <!--jdbc数据库连接 -->
+        <jdbcConnection driverClass="${jdbc.driver}" connectionURL="${jdbc.url}" userId="${jdbc.username}"
+                        password="${jdbc.password}"/>
+
+        <!-- 类型转换 -->
+        <javaTypeResolver>
+            <!--  默认false，把JDBC DECIMAL 和 NUMERIC 类型解析为 Integer
+                      true，把JDBC DECIMAL 和 NUMERIC 类型解析为java.math.BigDecimal-->
+            <property name="forceBigDecimals" value="false"/>
+        </javaTypeResolver>
+
+        <!--生成的model 包路径 -->
+        <javaModelGenerator targetPackage="${model.package}" targetProject="${target.project}">
+            <!-- 是否在当前路径下新加一层schema,eg：fase路径com.oop.eksp.user.model， true:com.oop.eksp.user.model.[schemaName] -->
+            <property name="enableSubPackages" value="ture"/>
+            <!--当数据库字段使用CHAR时 可以自动去掉不必要的空格。-->
+            <property name="trimStrings" value="true"/>
+        </javaModelGenerator>
+
+        <!--生成xml mapper文件 路径 -->
+        <sqlMapGenerator targetPackage="${xml.mapper.package}" targetProject="${target.project}">
+            <!-- 是否在当前路径下新加一层schema,eg：fase路径com.oop.eksp.user.model， true:com.oop.eksp.user.model.[schemaName] -->
+            <property name="enableSubPackages" value="ture"/>
+        </sqlMapGenerator>
+
+        <!-- 生成的Dao接口 的包路径 -->
+        <javaClientGenerator type="XMLMAPPER" targetPackage="${dao.package}" targetProject="${target.project}">
+            <!-- 是否在当前路径下新加一层schema,eg：fase路径com.oop.eksp.user.model， true:com.oop.eksp.user.model.[schemaName] -->
+            <property name="enableSubPackages" value="ture"/>
+        </javaClientGenerator>
+
+        <!-- 配置表信息 -->
+        <!-- schema即为数据库名 tableName为对应的数据库表 domainObjectName是要生成的实体类 enable*ByExample
+                是否生成 example类   -->
+        <!-- 更改tableName和domainObjectName就可以 -->
+        <!--<table tableName="%"-->
+               <!--enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"-->
+               <!--enableSelectByExample="false" selectByExampleQueryId="false" >-->
+            <!--&lt;!&ndash;是否跟数据库字段保持一致&ndash;&gt;-->
+            <!--<property name="useActualColumnNames" value="false"/>-->
+        <!--</table>-->
+
+        <table schema="purchase" tableName="t_department" domainObjectName="DepartmentInfo"
+               enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"
+               enableSelectByExample="false" selectByExampleQueryId="false"></table>
+        <table schema="purchase" tableName="t_permission" domainObjectName="PermissionInfo"
+               enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"
+               enableSelectByExample="false" selectByExampleQueryId="false"></table>
+        <table schema="purchase" tableName="t_role" domainObjectName="RoleInfo"
+               enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"
+               enableSelectByExample="false" selectByExampleQueryId="false"></table>
+        <table schema="purchase" tableName="t_user" domainObjectName="UserInfo"
+               enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"
+               enableSelectByExample="false" selectByExampleQueryId="false"></table>
+
+    </context>
+</generatorConfiguration>

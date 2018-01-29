@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zixun.purchase.persist.daomapper.UserInfoMapper">
+    <resultMap id="BaseResultMap" type="com.zixun.purchase.model.UserInfo">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="username" jdbcType="VARCHAR" property="username"/>
+        <result column="nickname" jdbcType="VARCHAR" property="nickname"/>
+        <result column="passwordhash" jdbcType="VARCHAR" property="passwordhash"/>
+        <result column="passwordsalt" jdbcType="VARCHAR" property="passwordsalt"/>
+        <result column="gender" jdbcType="INTEGER" property="gender"/>
+        <result column="status" jdbcType="INTEGER" property="status"/>
+        <result column="cellphone" jdbcType="VARCHAR" property="cellphone"/>
+        <result column="identitycard" jdbcType="VARCHAR" property="identitycard"/>
+        <result column="email" jdbcType="VARCHAR" property="email"/>
+        <result column="qq" jdbcType="VARCHAR" property="qq"/>
+        <result column="address" jdbcType="VARCHAR" property="address"/>
+        <result column="deptid" jdbcType="BIGINT" property="deptid"/>
+        <result column="createdate" jdbcType="TIMESTAMP" property="createdate"/>
+        <result column="createusername" jdbcType="VARCHAR" property="createusername"/>
+        <result column="modifydate" jdbcType="TIMESTAMP" property="modifydate"/>
+        <result column="modifyusername" jdbcType="VARCHAR" property="modifyusername"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id, username, nickname, passwordhash, passwordsalt, gender, status, cellphone, identitycard,
+        email, qq, address, deptid, createdate, createusername, modifydate, modifyusername
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_user
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        DELETE FROM t_user
+        WHERE id = #{id,jdbcType=BIGINT}
+    </delete>
+    <insert id="insert" parameterType="com.zixun.purchase.model.UserInfo">
+        INSERT INTO t_user (id, username, nickname,
+                            passwordhash, passwordsalt, gender,
+                            status, cellphone, identitycard,
+                            email, qq, address,
+                            deptid, createdate, createusername,
+                            modifydate, modifyusername)
+        VALUES (#{id,jdbcType=BIGINT}, #{username,jdbcType=VARCHAR}, #{nickname,jdbcType=VARCHAR},
+                                       #{passwordhash,jdbcType=VARCHAR}, #{passwordsalt,jdbcType=VARCHAR},
+                                       #{gender,jdbcType=INTEGER},
+                                       #{status,jdbcType=INTEGER}, #{cellphone,jdbcType=VARCHAR},
+                                       #{identitycard,jdbcType=VARCHAR},
+                                       #{email,jdbcType=VARCHAR}, #{qq,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR},
+                #{deptid,jdbcType=BIGINT}, #{createdate,jdbcType=TIMESTAMP}, #{createusername,jdbcType=VARCHAR},
+                #{modifydate,jdbcType=TIMESTAMP}, #{modifyusername,jdbcType=VARCHAR})
+    </insert>
+    <insert id="insertSelective" parameterType="com.zixun.purchase.model.UserInfo">
+        insert into t_user
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="username != null">
+                username,
+            </if>
+            <if test="nickname != null">
+                nickname,
+            </if>
+            <if test="passwordhash != null">
+                passwordhash,
+            </if>
+            <if test="passwordsalt != null">
+                passwordsalt,
+            </if>
+            <if test="gender != null">
+                gender,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="cellphone != null">
+                cellphone,
+            </if>
+            <if test="identitycard != null">
+                identitycard,
+            </if>
+            <if test="email != null">
+                email,
+            </if>
+            <if test="qq != null">
+                qq,
+            </if>
+            <if test="address != null">
+                address,
+            </if>
+            <if test="deptid != null">
+                deptid,
+            </if>
+            <if test="createdate != null">
+                createdate,
+            </if>
+            <if test="createusername != null">
+                createusername,
+            </if>
+            <if test="modifydate != null">
+                modifydate,
+            </if>
+            <if test="modifyusername != null">
+                modifyusername,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="username != null">
+                #{username,jdbcType=VARCHAR},
+            </if>
+            <if test="nickname != null">
+                #{nickname,jdbcType=VARCHAR},
+            </if>
+            <if test="passwordhash != null">
+                #{passwordhash,jdbcType=VARCHAR},
+            </if>
+            <if test="passwordsalt != null">
+                #{passwordsalt,jdbcType=VARCHAR},
+            </if>
+            <if test="gender != null">
+                #{gender,jdbcType=INTEGER},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=INTEGER},
+            </if>
+            <if test="cellphone != null">
+                #{cellphone,jdbcType=VARCHAR},
+            </if>
+            <if test="identitycard != null">
+                #{identitycard,jdbcType=VARCHAR},
+            </if>
+            <if test="email != null">
+                #{email,jdbcType=VARCHAR},
+            </if>
+            <if test="qq != null">
+                #{qq,jdbcType=VARCHAR},
+            </if>
+            <if test="address != null">
+                #{address,jdbcType=VARCHAR},
+            </if>
+            <if test="deptid != null">
+                #{deptid,jdbcType=BIGINT},
+            </if>
+            <if test="createdate != null">
+                #{createdate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createusername != null">
+                #{createusername,jdbcType=VARCHAR},
+            </if>
+            <if test="modifydate != null">
+                #{modifydate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="modifyusername != null">
+                #{modifyusername,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.zixun.purchase.model.UserInfo">
+        update t_user
+        <set>
+            <if test="username != null">
+                username = #{username,jdbcType=VARCHAR},
+            </if>
+            <if test="nickname != null">
+                nickname = #{nickname,jdbcType=VARCHAR},
+            </if>
+            <if test="passwordhash != null">
+                passwordhash = #{passwordhash,jdbcType=VARCHAR},
+            </if>
+            <if test="passwordsalt != null">
+                passwordsalt = #{passwordsalt,jdbcType=VARCHAR},
+            </if>
+            <if test="gender != null">
+                gender = #{gender,jdbcType=INTEGER},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=INTEGER},
+            </if>
+            <if test="cellphone != null">
+                cellphone = #{cellphone,jdbcType=VARCHAR},
+            </if>
+            <if test="identitycard != null">
+                identitycard = #{identitycard,jdbcType=VARCHAR},
+            </if>
+            <if test="email != null">
+                email = #{email,jdbcType=VARCHAR},
+            </if>
+            <if test="qq != null">
+                qq = #{qq,jdbcType=VARCHAR},
+            </if>
+            <if test="address != null">
+                address = #{address,jdbcType=VARCHAR},
+            </if>
+            <if test="deptid != null">
+                deptid = #{deptid,jdbcType=BIGINT},
+            </if>
+            <if test="createdate != null">
+                createdate = #{createdate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createusername != null">
+                createusername = #{createusername,jdbcType=VARCHAR},
+            </if>
+            <if test="modifydate != null">
+                modifydate = #{modifydate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="modifyusername != null">
+                modifyusername = #{modifyusername,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.zixun.purchase.model.UserInfo">
+        UPDATE t_user
+        SET username       = #{username,jdbcType=VARCHAR},
+            nickname       = #{nickname,jdbcType=VARCHAR},
+            passwordhash   = #{passwordhash,jdbcType=VARCHAR},
+            passwordsalt   = #{passwordsalt,jdbcType=VARCHAR},
+            gender         = #{gender,jdbcType=INTEGER},
+            status         = #{status,jdbcType=INTEGER},
+            cellphone      = #{cellphone,jdbcType=VARCHAR},
+            identitycard   = #{identitycard,jdbcType=VARCHAR},
+            email          = #{email,jdbcType=VARCHAR},
+            qq             = #{qq,jdbcType=VARCHAR},
+            address        = #{address,jdbcType=VARCHAR},
+            deptid         = #{deptid,jdbcType=BIGINT},
+            createdate     = #{createdate,jdbcType=TIMESTAMP},
+            createusername = #{createusername,jdbcType=VARCHAR},
+            modifydate     = #{modifydate,jdbcType=TIMESTAMP},
+            modifyusername = #{modifyusername,jdbcType=VARCHAR}
+        WHERE id = #{id,jdbcType=BIGINT}
+    </update>
+
+    <select id="selectByUserName" parameterType="java.lang.String" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM t_user
+        WHERE username=#{userName}
+    </select>
+
+    <select id="selectByCondition" parameterType="com.zixun.purchase.model.query.UserParam"
+            resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM t_user
+        <where>
+            <if test="username != null and username != ''">
+                and username = #{username,jdbcType=VARCHAR}
+            </if>
+            <if test="nickname != null and nickname != ''">
+                and nickname = #{nickname,jdbcType=VARCHAR}
+            </if>
+            <if test="gender != null">
+                and gender = #{gender,jdbcType=INTEGER}
+            </if>
+            <if test="status != null">
+                and status = #{status,jdbcType=INTEGER}
+            </if>
+            <if test="cellphone != null and cellphone != ''">
+                and cellphone = #{cellphone,jdbcType=VARCHAR}
+            </if>
+            <if test="identitycard != null and identitycard != ''">
+                and identitycard = #{identitycard,jdbcType=VARCHAR}
+            </if>
+            <if test="email != null and email != ''">
+                and email = #{email,jdbcType=VARCHAR}
+            </if>
+            <if test="qq != null and qq != ''">
+                and qq = #{qq,jdbcType=VARCHAR}
+            </if>
+            <if test="address != null and address != ''">
+                and address = #{address,jdbcType=VARCHAR}
+            </if>
+            <if test="deptid != null">
+                and deptid = #{deptid,jdbcType=BIGINT}
+            </if>
+        </where>
+    </select>
+</mapper>

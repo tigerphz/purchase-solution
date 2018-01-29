@@ -1,0 +1,14 @@
+DROP TABLE IF EXISTS t_department;
+CREATE TABLE t_department
+(
+  id             BIGINT PRIMARY KEY, #主键
+  deptname       VARCHAR(50) NOT NULL, #名称
+  status         INTEGER DEFAULT 0, #状态
+  description    VARCHAR(200),
+  parentid       BIGINT, #父节点
+
+  createdate     DATETIME,
+  createusername VARCHAR(50),
+  modifydate     DATETIME,
+  modifyusername VARCHAR(50)
+);

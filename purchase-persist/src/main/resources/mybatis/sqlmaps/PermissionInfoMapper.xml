@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zixun.purchase.persist.daomapper.PermissionInfoMapper">
+    <resultMap id="BaseResultMap" type="com.zixun.purchase.model.PermissionInfo">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="permname" jdbcType="VARCHAR" property="permname"/>
+        <result column="status" jdbcType="INTEGER" property="status"/>
+        <result column="description" jdbcType="VARCHAR" property="description"/>
+        <result column="type" jdbcType="INTEGER" property="type"/>
+        <result column="icon" jdbcType="VARCHAR" property="icon"/>
+        <result column="sort" jdbcType="INTEGER" property="sort"/>
+        <result column="parentid" jdbcType="BIGINT" property="parentid"/>
+        <result column="url" jdbcType="VARCHAR" property="url"/>
+        <result column="code" jdbcType="VARCHAR" property="code"/>
+        <result column="createdate" jdbcType="TIMESTAMP" property="createdate"/>
+        <result column="createusername" jdbcType="VARCHAR" property="createusername"/>
+        <result column="modifydate" jdbcType="TIMESTAMP" property="modifydate"/>
+        <result column="modifyusername" jdbcType="VARCHAR" property="modifyusername"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id, permname, status, description, type, icon, sort, parentid, url, code, createdate,
+        createusername, modifydate, modifyusername
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_permission
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        DELETE FROM t_permission
+        WHERE id = #{id,jdbcType=BIGINT}
+    </delete>
+    <insert id="insert" parameterType="com.zixun.purchase.model.PermissionInfo">
+        INSERT INTO t_permission (id, permname, status,
+                                  description, type, icon,
+                                  sort, parentid, url,
+                                  code, createdate, createusername,
+                                  modifydate, modifyusername)
+        VALUES (#{id,jdbcType=BIGINT}, #{permname,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER},
+                                       #{description,jdbcType=VARCHAR}, #{type,jdbcType=INTEGER},
+                                       #{icon,jdbcType=VARCHAR},
+                                       #{sort,jdbcType=INTEGER}, #{parentid,jdbcType=BIGINT}, #{url,jdbcType=VARCHAR},
+                                       #{code,jdbcType=VARCHAR}, #{createdate,jdbcType=TIMESTAMP},
+                #{createusername,jdbcType=VARCHAR},
+                #{modifydate,jdbcType=TIMESTAMP}, #{modifyusername,jdbcType=VARCHAR})
+    </insert>
+    <insert id="insertSelective" parameterType="com.zixun.purchase.model.PermissionInfo">
+        insert into t_permission
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="permname != null">
+                permname,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="description != null">
+                description,
+            </if>
+            <if test="type != null">
+                type,
+            </if>
+            <if test="icon != null">
+                icon,
+            </if>
+            <if test="sort != null">
+                sort,
+            </if>
+            <if test="parentid != null">
+                parentid,
+            </if>
+            <if test="url != null">
+                url,
+            </if>
+            <if test="code != null">
+                code,
+            </if>
+            <if test="createdate != null">
+                createdate,
+            </if>
+            <if test="createusername != null">
+                createusername,
+            </if>
+            <if test="modifydate != null">
+                modifydate,
+            </if>
+            <if test="modifyusername != null">
+                modifyusername,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="permname != null">
+                #{permname,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=INTEGER},
+            </if>
+            <if test="description != null">
+                #{description,jdbcType=VARCHAR},
+            </if>
+            <if test="type != null">
+                #{type,jdbcType=INTEGER},
+            </if>
+            <if test="icon != null">
+                #{icon,jdbcType=VARCHAR},
+            </if>
+            <if test="sort != null">
+                #{sort,jdbcType=INTEGER},
+            </if>
+            <if test="parentid != null">
+                #{parentid,jdbcType=BIGINT},
+            </if>
+            <if test="url != null">
+                #{url,jdbcType=VARCHAR},
+            </if>
+            <if test="code != null">
+                #{code,jdbcType=VARCHAR},
+            </if>
+            <if test="createdate != null">
+                #{createdate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createusername != null">
+                #{createusername,jdbcType=VARCHAR},
+            </if>
+            <if test="modifydate != null">
+                #{modifydate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="modifyusername != null">
+                #{modifyusername,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.zixun.purchase.model.PermissionInfo">
+        update t_permission
+        <set>
+            <if test="permname != null">
+                permname = #{permname,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=INTEGER},
+            </if>
+            <if test="description != null">
+                description = #{description,jdbcType=VARCHAR},
+            </if>
+            <if test="type != null">
+                type = #{type,jdbcType=INTEGER},
+            </if>
+            <if test="icon != null">
+                icon = #{icon,jdbcType=VARCHAR},
+            </if>
+            <if test="sort != null">
+                sort = #{sort,jdbcType=INTEGER},
+            </if>
+            <if test="parentid != null">
+                parentid = #{parentid,jdbcType=BIGINT},
+            </if>
+            <if test="url != null">
+                url = #{url,jdbcType=VARCHAR},
+            </if>
+            <if test="code != null">
+                code = #{code,jdbcType=VARCHAR},
+            </if>
+            <if test="createdate != null">
+                createdate = #{createdate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createusername != null">
+                createusername = #{createusername,jdbcType=VARCHAR},
+            </if>
+            <if test="modifydate != null">
+                modifydate = #{modifydate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="modifyusername != null">
+                modifyusername = #{modifyusername,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.zixun.purchase.model.PermissionInfo">
+        UPDATE t_permission
+        SET permname       = #{permname,jdbcType=VARCHAR},
+            status         = #{status,jdbcType=INTEGER},
+            description    = #{description,jdbcType=VARCHAR},
+            type           = #{type,jdbcType=INTEGER},
+            icon           = #{icon,jdbcType=VARCHAR},
+            sort           = #{sort,jdbcType=INTEGER},
+            parentid       = #{parentid,jdbcType=BIGINT},
+            url            = #{url,jdbcType=VARCHAR},
+            code           = #{code,jdbcType=VARCHAR},
+            createdate     = #{createdate,jdbcType=TIMESTAMP},
+            createusername = #{createusername,jdbcType=VARCHAR},
+            modifydate     = #{modifydate,jdbcType=TIMESTAMP},
+            modifyusername = #{modifyusername,jdbcType=VARCHAR}
+        WHERE id = #{id,jdbcType=BIGINT}
+    </update>
+
+    <sql id="selectByUserIdBase">
+        SELECT p.*
+        FROM t_permission p
+            INNER JOIN t_role_permission rp ON p.id = rp.permid
+            INNER JOIN t_role r ON rp.roleid = r.id
+            INNER JOIN t_user_role ur ON r.id = ur.roleid
+            INNER JOIN t_user u ON u.id = ur.userid
+    </sql>
+
+    <select id="selectByUserId" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        <include refid="selectByUserIdBase"></include>
+        WHERE u.id = #{userId,jdbcType=BIGINT}
+    </select>
+
+    <select id="selectByUserName" parameterType="java.lang.String" resultMap="BaseResultMap">
+        <include refid="selectByUserIdBase"></include>
+        WHERE u.username = #{userName,jdbcType=VARCHAR}
+    </select>
+
+    <select id="selectByCondition" parameterType="com.zixun.purchase.model.query.PermissionParam"
+            resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM t_permission
+        <where>
+            <if test="permname != null and permname !=''">
+                and permname = #{permname,jdbcType=VARCHAR}
+            </if>
+            <if test="status != null">
+                and status = #{status,jdbcType=INTEGER}
+            </if>
+            <if test="url != null and url !=''">
+                and url like concat(concat('%',#{url}),'%')
+            </if>
+        </where>
+    </select>
+
+    <select id="selectShiroAllPermission" resultMap="BaseResultMap">
+        SELECT p.*
+        FROM t_permission p
+        WHERE p.type IN (1, 2)
+              AND p.code IS NOT NULL
+    </select>
+
+    <select id="selectShiroPermissionByUserId" resultMap="BaseResultMap">
+        <include refid="selectByUserIdBase"></include>
+        WHERE u.id = #{userId,jdbcType=BIGINT}
+        AND p.type IN (1, 2)
+        AND p.code IS NOT NULL
+    </select>
+
+    <select id="selectMenuNode" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        FROM t_permission
+        WHERE type in (0,1)
+    </select>
+
+    <select id="selectByRoleId" resultMap="BaseResultMap">
+        SELECT p.*
+        FROM t_permission p
+            INNER JOIN t_role_permission rp ON p.id = rp.permid
+            INNER JOIN t_role r ON rp.roleid = r.id
+        WHERE r.id = #{roleId,jdbcType=BIGINT}
+    </select>
+
+    <delete id="deleteRolePermRelationByRoleId">
+        DELETE FROM t_role_permission
+        WHERE roleid = #{roleId,jdbcType=BIGINT}
+    </delete>
+
+    <insert id="insertRolePermRelation">
+        INSERT t_role_permission (roleid, permid)
+        VALUES (#{roleId,jdbcType=BIGINT}, #{permId,jdbcType=BIGINT})
+    </insert>
+</mapper>

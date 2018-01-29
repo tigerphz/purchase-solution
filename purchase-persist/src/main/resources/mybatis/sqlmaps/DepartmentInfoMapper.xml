@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zixun.purchase.persist.daomapper.DepartmentInfoMapper">
+    <resultMap id="BaseResultMap" type="com.zixun.purchase.model.DepartmentInfo">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="deptname" jdbcType="VARCHAR" property="deptname"/>
+        <result column="status" jdbcType="INTEGER" property="status"/>
+        <result column="description" jdbcType="VARCHAR" property="description"/>
+        <result column="parentid" jdbcType="BIGINT" property="parentid"/>
+        <result column="createdate" jdbcType="TIMESTAMP" property="createdate"/>
+        <result column="createusername" jdbcType="VARCHAR" property="createusername"/>
+        <result column="modifydate" jdbcType="TIMESTAMP" property="modifydate"/>
+        <result column="modifyusername" jdbcType="VARCHAR" property="modifyusername"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id, deptname, status, description, parentid, createdate, createusername, modifydate,
+        modifyusername
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_department
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        DELETE FROM t_department
+        WHERE id = #{id,jdbcType=BIGINT}
+    </delete>
+    <insert id="insert" parameterType="com.zixun.purchase.model.DepartmentInfo">
+        INSERT INTO t_department (id, deptname, status,
+                                  description, parentid, createdate,
+                                  createusername, modifydate, modifyusername
+        )
+        VALUES (#{id,jdbcType=BIGINT}, #{deptname,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER},
+                #{description,jdbcType=VARCHAR}, #{parentid,jdbcType=BIGINT}, #{createdate,jdbcType=TIMESTAMP},
+                #{createusername,jdbcType=VARCHAR}, #{modifydate,jdbcType=TIMESTAMP}, #{modifyusername,jdbcType=VARCHAR}
+        )
+    </insert>
+    <insert id="insertSelective" parameterType="com.zixun.purchase.model.DepartmentInfo">
+        insert into t_department
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="deptname != null">
+                deptname,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="description != null">
+                description,
+            </if>
+            <if test="parentid != null">
+                parentid,
+            </if>
+            <if test="createdate != null">
+                createdate,
+            </if>
+            <if test="createusername != null">
+                createusername,
+            </if>
+            <if test="modifydate != null">
+                modifydate,
+            </if>
+            <if test="modifyusername != null">
+                modifyusername,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="deptname != null">
+                #{deptname,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=INTEGER},
+            </if>
+            <if test="description != null">
+                #{description,jdbcType=VARCHAR},
+            </if>
+            <if test="parentid != null">
+                #{parentid,jdbcType=BIGINT},
+            </if>
+            <if test="createdate != null">
+                #{createdate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createusername != null">
+                #{createusername,jdbcType=VARCHAR},
+            </if>
+            <if test="modifydate != null">
+                #{modifydate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="modifyusername != null">
+                #{modifyusername,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.zixun.purchase.model.DepartmentInfo">
+        update t_department
+        <set>
+            <if test="deptname != null">
+                deptname = #{deptname,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=INTEGER},
+            </if>
+            <if test="description != null">
+                description = #{description,jdbcType=VARCHAR},
+            </if>
+            <if test="parentid != null">
+                parentid = #{parentid,jdbcType=BIGINT},
+            </if>
+            <if test="createdate != null">
+                createdate = #{createdate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createusername != null">
+                createusername = #{createusername,jdbcType=VARCHAR},
+            </if>
+            <if test="modifydate != null">
+                modifydate = #{modifydate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="modifyusername != null">
+                modifyusername = #{modifyusername,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.zixun.purchase.model.DepartmentInfo">
+        UPDATE t_department
+        SET deptname       = #{deptname,jdbcType=VARCHAR},
+            status         = #{status,jdbcType=INTEGER},
+            description    = #{description,jdbcType=VARCHAR},
+            parentid       = #{parentid,jdbcType=BIGINT},
+            createdate     = #{createdate,jdbcType=TIMESTAMP},
+            createusername = #{createusername,jdbcType=VARCHAR},
+            modifydate     = #{modifydate,jdbcType=TIMESTAMP},
+            modifyusername = #{modifyusername,jdbcType=VARCHAR}
+        WHERE id = #{id,jdbcType=BIGINT}
+    </update>
+
+    <select id="selectByCondition" parameterType="com.zixun.purchase.model.query.DepartmentParam"
+            resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM t_department
+        <where>
+            <if test="deptname != null">
+                and deptname = #{deptname,jdbcType=VARCHAR}
+            </if>
+            <if test="status != null">
+                and status = #{status,jdbcType=INTEGER}
+            </if>
+            <if test="description != null">
+                and description = #{description,jdbcType=VARCHAR}
+            </if>
+            <if test="parentid != null">
+                and parentid = #{parentid,jdbcType=BIGINT}
+            </if>
+        </where>
+    </select>
+</mapper>

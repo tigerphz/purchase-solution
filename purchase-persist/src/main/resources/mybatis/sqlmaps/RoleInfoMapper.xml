@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zixun.purchase.persist.daomapper.RoleInfoMapper">
+    <resultMap id="BaseResultMap" type="com.zixun.purchase.model.RoleInfo">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="rolename" jdbcType="VARCHAR" property="rolename"/>
+        <result column="status" jdbcType="INTEGER" property="status"/>
+        <result column="description" jdbcType="VARCHAR" property="description"/>
+        <result column="createdate" jdbcType="TIMESTAMP" property="createdate"/>
+        <result column="createusername" jdbcType="VARCHAR" property="createusername"/>
+        <result column="modifydate" jdbcType="TIMESTAMP" property="modifydate"/>
+        <result column="modifyusername" jdbcType="VARCHAR" property="modifyusername"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id, rolename, status, description, createdate, createusername, modifydate, modifyusername
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_role
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        DELETE FROM t_role
+        WHERE id = #{id,jdbcType=BIGINT}
+    </delete>
+    <insert id="insert" parameterType="com.zixun.purchase.model.RoleInfo">
+        INSERT INTO t_role (id, rolename, status,
+                            description, createdate, createusername,
+                            modifydate, modifyusername)
+        VALUES (#{id,jdbcType=BIGINT}, #{rolename,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER},
+                #{description,jdbcType=VARCHAR}, #{createdate,jdbcType=TIMESTAMP}, #{createusername,jdbcType=VARCHAR},
+                #{modifydate,jdbcType=TIMESTAMP}, #{modifyusername,jdbcType=VARCHAR})
+    </insert>
+    <insert id="insertSelective" parameterType="com.zixun.purchase.model.RoleInfo">
+        insert into t_role
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="rolename != null">
+                rolename,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="description != null">
+                description,
+            </if>
+            <if test="createdate != null">
+                createdate,
+            </if>
+            <if test="createusername != null">
+                createusername,
+            </if>
+            <if test="modifydate != null">
+                modifydate,
+            </if>
+            <if test="modifyusername != null">
+                modifyusername,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="rolename != null">
+                #{rolename,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=INTEGER},
+            </if>
+            <if test="description != null">
+                #{description,jdbcType=VARCHAR},
+            </if>
+            <if test="createdate != null">
+                #{createdate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createusername != null">
+                #{createusername,jdbcType=VARCHAR},
+            </if>
+            <if test="modifydate != null">
+                #{modifydate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="modifyusername != null">
+                #{modifyusername,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.zixun.purchase.model.RoleInfo">
+        update t_role
+        <set>
+            <if test="rolename != null">
+                rolename = #{rolename,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=INTEGER},
+            </if>
+            <if test="description != null">
+                description = #{description,jdbcType=VARCHAR},
+            </if>
+            <if test="createdate != null">
+                createdate = #{createdate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createusername != null">
+                createusername = #{createusername,jdbcType=VARCHAR},
+            </if>
+            <if test="modifydate != null">
+                modifydate = #{modifydate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="modifyusername != null">
+                modifyusername = #{modifyusername,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.zixun.purchase.model.RoleInfo">
+        UPDATE t_role
+        SET rolename       = #{rolename,jdbcType=VARCHAR},
+            status         = #{status,jdbcType=INTEGER},
+            description    = #{description,jdbcType=VARCHAR},
+            createdate     = #{createdate,jdbcType=TIMESTAMP},
+            createusername = #{createusername,jdbcType=VARCHAR},
+            modifydate     = #{modifydate,jdbcType=TIMESTAMP},
+            modifyusername = #{modifyusername,jdbcType=VARCHAR}
+        WHERE id = #{id,jdbcType=BIGINT}
+    </update>
+
+    <select id="selectByCondition" parameterType="com.zixun.purchase.model.query.RoleParam"
+            resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM t_role
+        <where>
+            <if test="rolename != null and rolename != ''">
+                and rolename = #{rolename,jdbcType=VARCHAR}
+            </if>
+            <if test="status != null">
+                and status = #{status,jdbcType=INTEGER}
+            </if>
+            <if test="description != null and description != ''">
+                and description = #{description,jdbcType=VARCHAR}
+            </if>
+        </where>
+    </select>
+
+    <select id="selectByUserId" resultMap="BaseResultMap">
+        SELECT r.*
+        FROM t_role r
+            INNER JOIN t_user_role ur ON r.id = ur.roleid
+            INNER JOIN t_user u ON ur.userid = u.id
+        WHERE u.id = #{userId,jdbcType=BIGINT}
+    </select>
+
+    <select id="selectByUserName" resultMap="BaseResultMap">
+        SELECT r.*
+        FROM t_role r
+            INNER JOIN t_user_role ur ON r.id = ur.roleid
+            INNER JOIN t_user u ON ur.userid = u.id
+        WHERE u.username = #{userName,jdbcType=VARCHAR}
+    </select>
+
+    <delete id="deleteUserRoleRelationByUserId">
+        DELETE FROM t_user_role
+        WHERE userid = #{userId,jdbcType=BIGINT}
+    </delete>
+
+    <insert id="insertUserRoleRelation">
+        INSERT t_user_role (userid, roleid)
+        VALUES (#{userId,jdbcType=BIGINT}, #{roleId,jdbcType=BIGINT})
+    </insert>
+</mapper>

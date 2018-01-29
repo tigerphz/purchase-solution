@@ -1,0 +1,13 @@
+DROP TABLE IF EXISTS t_role;
+CREATE TABLE t_role
+(
+  id             BIGINT PRIMARY KEY, #主键
+  rolename       VARCHAR(50) NOT NULL, #名称
+  status         INTEGER DEFAULT 0, #状态
+  description    VARCHAR(200),
+
+  createdate     DATETIME,
+  createusername VARCHAR(50),
+  modifydate     DATETIME,
+  modifyusername VARCHAR(50)
+);

@@ -1,0 +1,6 @@
+DROP TABLE IF EXISTS t_role_permission;
+CREATE TABLE t_role_permission
+(
+  roleid BIGINT,
+  permid BIGINT
+);

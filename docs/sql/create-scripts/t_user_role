@@ -1,0 +1,6 @@
+DROP TABLE IF EXISTS t_user_role;
+CREATE TABLE t_user_role
+(
+  userid BIGINT,
+  roleid BIGINT
+);
