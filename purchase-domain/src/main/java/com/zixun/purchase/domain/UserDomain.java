@@ -38,12 +38,20 @@ public class UserDomain {
         return userRepository.insert(user);
     }
 
-    public boolean updateByPrimaryKeySelective(UserInfo record) {
-        return userRepository.updateByPrimaryKeySelective(record);
+    public Boolean insertSelective(UserInfo record) {
+        return userRepository.insertSelective(record);
+    }
+
+    public boolean updateByIdSelective(UserInfo record) {
+        return userRepository.updateByIdSelective(record);
     }
 
     public UserInfo selectByUserName(String userName) {
         return userRepository.selectByUserName(userName);
+    }
+
+    public UserInfo selectByUserId(Long userId) {
+        return userRepository.selectByPrimaryKey(userId);
     }
 
     public PageInfo<UserInfo> selectByCondition(UserParam param) {

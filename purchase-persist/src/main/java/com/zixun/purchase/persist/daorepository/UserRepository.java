@@ -36,7 +36,7 @@ public class UserRepository {
         return userInfoMapper.selectByPrimaryKey(id);
     }
 
-    public boolean updateByPrimaryKeySelective(UserInfo record) {
+    public boolean updateByIdSelective(UserInfo record) {
         return userInfoMapper.updateByPrimaryKeySelective(record) > 0;
     }
 

@@ -36,14 +36,18 @@ public class DynamicPermsManager {
         Map<String, String> urlPermMap = new LinkedHashMap<>(30);
 
         urlPermMap.put("/api/login", "anon");
+        urlPermMap.put("/api/logout", "anon");
         urlPermMap.put("/api/401", "anon");
-        urlPermMap.put("/api/users/logininfo", "jwt");
 
         List<PermissionInfo> permissionInfoList = permissionRepository.selectShiroAllPermission();
 
+        //使用权限控制url请求是否可以访问
         for (PermissionInfo permissionInfo : permissionInfoList) {
             urlPermMap.put(permissionInfo.getUrl(), String.format("jwt,perms[%s]", permissionInfo.getCode()));
         }
+
+        //所有api目录的请求最少必须具有jwt权限
+        urlPermMap.put("/api/**", "jwt");
 
         return urlPermMap;
     }

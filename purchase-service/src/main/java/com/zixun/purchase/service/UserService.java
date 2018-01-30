@@ -17,12 +17,20 @@ public class UserService {
         return userDomain.insert(user);
     }
 
-    public boolean updateByPrimaryKeySelective(UserInfo record) {
-        return userDomain.updateByPrimaryKeySelective(record);
+    public Boolean insertSelective(UserInfo record) {
+        return userDomain.insertSelective(record);
+    }
+
+    public boolean updateByIdSelective(UserInfo record) {
+        return userDomain.updateByIdSelective(record);
     }
 
     public UserInfo selectByUserName(String userName) {
         return userDomain.selectByUserName(userName);
+    }
+
+    public UserInfo selectByUserId(Long userId) {
+        return userDomain.selectByUserId(userId);
     }
 
     public PageInfo<UserInfo> selectByCondition(UserParam param) {

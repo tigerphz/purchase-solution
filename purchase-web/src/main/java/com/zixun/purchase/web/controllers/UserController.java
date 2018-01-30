@@ -25,6 +25,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import sun.util.resources.ga.LocaleNames_ga;
 
 import javax.validation.Valid;
 import java.util.Date;
@@ -112,7 +113,7 @@ public class UserController {
         return resultBean;
     }
 
-    @RequestMapping(value = "update", method = RequestMethod.POST)
+    @RequestMapping(value = {"update","user"}, method = RequestMethod.POST)
     @ApiOperation("更新用户")
     @ApiImplicitParams({
             @ApiImplicitParam(paramType = "body", name = "userVO", dataType = "UserVO", value = "用户信息")
@@ -128,7 +129,7 @@ public class UserController {
         userInfo.setModifydate(date);
         userInfo.setModifyusername(TokenManager.getUserName());
 
-        Boolean isSucc = userService.updateByPrimaryKeySelective(userInfo);
+        Boolean isSucc = userService.updateByIdSelective(userInfo);
 
         ResultBean<Boolean> resultBean = new ResultBean<>(isSucc);
         if (!isSucc) {
@@ -162,13 +163,59 @@ public class UserController {
         userInfo.setId(id);
         userInfo.setStatus(status);
 
-        Boolean isSucc = userService.updateByPrimaryKeySelective(userInfo);
+        Boolean isSucc = userService.updateByIdSelective(userInfo);
         resultBean.setData(isSucc);
 
         if (!isSucc) {
             resultBean.setFailMessage("更新用户状态失败");
         }
 
+        return resultBean;
+    }
+
+    @RequestMapping(value = "password", method = RequestMethod.POST)
+    @ApiOperation("更新用户密码")
+    @ApiImplicitParams({
+            @ApiImplicitParam(paramType = "body", name = "userVO", dataType = "UserVO", value = "userVO", required = true),
+    })
+    public ResultBean<Boolean> updatePassword(@RequestBody UserVO userVO) {
+        ResultBean<Boolean> resultBean = new ResultBean<>();
+
+        if (StringUtils.isEmpty(userVO.getId()) || StringUtils.isEmpty(userVO.getPassword())) {
+            resultBean.setFailMessage("接受到的参数错误");
+            return resultBean;
+        }
+
+        UserInfo userInfo = userService.selectByUserId(userVO.getId());
+
+        String newPassword = new Md5Hash(userVO.getPassword(), userInfo.getPasswordsalt(), AuthRealm.HASHITERATIONS).toString();
+
+        userInfo = new UserInfo();
+        userInfo.setId(userVO.getId());
+        userInfo.setPasswordhash(newPassword);
+
+        boolean isSucc = userService.updateByIdSelective(userInfo);
+        resultBean.setData(isSucc);
+
+        if (!isSucc) {
+            resultBean.setFailMessage("更新用户密码失败");
+        }
+
+        return resultBean;
+    }
+
+    @RequestMapping(value = "info", method = RequestMethod.GET)
+    @ApiOperation("通过userId获取用户")
+    @ApiImplicitParams({
+            @ApiImplicitParam(paramType = "query", name = "userId", dataType = "Long", value = "userId", required = true),
+    })
+    public ResultBean<UserVO> getUserById(Long userId) {
+        ResultBean<UserVO> resultBean = new ResultBean<>();
+
+        UserInfo userInfo = userService.selectByUserId(userId);
+        UserVO userVO = userMapper.from(userInfo);
+
+        resultBean.setData(userVO);
         return resultBean;
     }
 }
