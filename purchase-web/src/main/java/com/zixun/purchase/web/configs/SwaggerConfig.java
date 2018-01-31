@@ -1,4 +1,4 @@
-package com.zixun.purchase;
+package com.zixun.purchase.web.configs;
 
 import com.zixun.purchase.core.shiro.filters.TokenFilter;
 import org.springframework.context.annotation.Bean;

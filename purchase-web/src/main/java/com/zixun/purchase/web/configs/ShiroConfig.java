@@ -1,6 +1,7 @@
-package com.zixun.purchase;
+package com.zixun.purchase.web.configs;
 
 import com.zixun.purchase.core.shiro.AuthRealm;
+import com.zixun.purchase.core.shiro.StaticConfig;
 import com.zixun.purchase.core.shiro.filters.TokenFilter;
 import org.apache.shiro.cache.MemoryConstrainedCacheManager;
 import org.apache.shiro.mgt.DefaultSessionStorageEvaluator;
@@ -19,7 +20,6 @@ import org.springframework.context.annotation.Configuration;
 
 import javax.servlet.Filter;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
@@ -87,6 +87,13 @@ public class ShiroConfig {
     @Bean(name = "authRealm")
     public AuthRealm authRealm() {
         AuthRealm authRealm = new AuthRealm();
+        //认证缓存
+        authRealm.setAuthenticationCacheName(StaticConfig.AUTHENTICATIONCACHE_NAME);
+        authRealm.setAuthenticationCachingEnabled(true);
+
+        //授权缓存
+        authRealm.setAuthorizationCacheName(StaticConfig.AUTHORIZATIONCACHE_NAME);
+        authRealm.setAuthorizationCachingEnabled(true);
         return authRealm;
     }
 
