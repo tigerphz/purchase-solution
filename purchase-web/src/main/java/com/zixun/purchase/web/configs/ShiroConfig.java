@@ -3,7 +3,8 @@ package com.zixun.purchase.web.configs;
 import com.zixun.purchase.core.shiro.AuthRealm;
 import com.zixun.purchase.core.shiro.StaticConfig;
 import com.zixun.purchase.core.shiro.filters.TokenFilter;
-import org.apache.shiro.cache.MemoryConstrainedCacheManager;
+import net.sf.ehcache.CacheManager;
+import org.apache.shiro.cache.ehcache.EhCacheManager;
 import org.apache.shiro.mgt.DefaultSessionStorageEvaluator;
 import org.apache.shiro.mgt.DefaultSubjectDAO;
 import org.apache.shiro.mgt.SecurityManager;
@@ -15,6 +16,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -30,6 +32,7 @@ import java.util.Map;
  * @modified by:
  */
 @Configuration
+@AutoConfigureAfter(CacheConfig.class)
 public class ShiroConfig {
     private static Logger logger = LoggerFactory.getLogger(ShiroConfig.class);
 
@@ -57,14 +60,14 @@ public class ShiroConfig {
      * @return
      */
     @Bean(name = "securityManager")
-    public SecurityManager securityManager(@Qualifier("authRealm") AuthRealm authRealm) {
+    public SecurityManager securityManager(@Qualifier("authRealm") AuthRealm authRealm,
+                                           @Qualifier("ehCacheManager") EhCacheManager ehCacheManager) {
         logger.info("shiro已经加载");
 
         DefaultWebSecurityManager manager = new DefaultWebSecurityManager();
         manager.setRealm(authRealm);
 
-        //使用内存做为shiro的缓存
-        manager.setCacheManager(new MemoryConstrainedCacheManager());
+        manager.setCacheManager(ehCacheManager);
 
         /*
          * 关闭shiro自带的session，详情见文档
@@ -77,6 +80,15 @@ public class ShiroConfig {
         manager.setSubjectDAO(subjectDAO);
 
         return manager;
+    }
+
+    @Bean(name = "ehCacheManager")
+    public EhCacheManager ehCacheManager() {
+        CacheManager cacheManager = CacheManager.getInstance();
+        EhCacheManager ehCacheManager = new EhCacheManager();
+        ehCacheManager.setCacheManager(cacheManager);
+
+        return ehCacheManager;
     }
 
     /**

@@ -82,7 +82,7 @@ public class IndexController {
         return resultBean;
     }
 
-    @RequestMapping("/401")
+    @RequestMapping(value = "/401", method = RequestMethod.GET)
     public ResultBean<Boolean> Unauthorized() {
         ResultBean<Boolean> resultBean = new ResultBean<>();
         resultBean.setFailMessage("您没有得到授权进行该操作");
