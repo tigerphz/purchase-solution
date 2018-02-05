@@ -6,18 +6,23 @@ import com.zixun.purchase.model.UserInfo;
 import com.zixun.purchase.model.enums.UserStatusEnum;
 import com.zixun.purchase.model.vo.LoginVO;
 import com.zixun.purchase.model.vo.ResultBean;
-import com.zixun.purchase.model.vo.UserVO;
 import com.zixun.purchase.service.UserService;
 import com.zixun.purchase.utils.jwt.JwtUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
-import org.apache.shiro.authc.*;
+import org.apache.shiro.authc.DisabledAccountException;
+import org.apache.shiro.authc.IncorrectCredentialsException;
+import org.apache.shiro.authc.LockedAccountException;
+import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.crypto.hash.Md5Hash;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
 

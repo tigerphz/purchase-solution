@@ -3,10 +3,8 @@ package com.zixun.purchase.web.controllers;
 import com.github.pagehelper.PageInfo;
 import com.zixun.purchase.core.shiro.AuthRealm;
 import com.zixun.purchase.core.shiro.TokenManager;
-import com.zixun.purchase.domain.UserDomain;
 import com.zixun.purchase.model.UserInfo;
 import com.zixun.purchase.model.bo.LoginedUserBO;
-import com.zixun.purchase.model.enums.UserStatusEnum;
 import com.zixun.purchase.model.query.UserParam;
 import com.zixun.purchase.model.vo.ResultBean;
 import com.zixun.purchase.model.vo.UserVO;
@@ -25,7 +23,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import sun.util.resources.ga.LocaleNames_ga;
 
 import javax.validation.Valid;
 import java.util.Date;
@@ -113,7 +110,7 @@ public class UserController {
         return resultBean;
     }
 
-    @RequestMapping(value = {"update","user"}, method = RequestMethod.POST)
+    @RequestMapping(value = {"update", "user"}, method = RequestMethod.POST)
     @ApiOperation("更新用户")
     @ApiImplicitParams({
             @ApiImplicitParam(paramType = "body", name = "userVO", dataType = "UserVO", value = "用户信息")
@@ -125,6 +122,9 @@ public class UserController {
         }
 
         UserInfo userInfo = userMapper.to(userVO);
+        //不修改用户名
+        userInfo.setUsername(null);
+
         Date date = new Date();
         userInfo.setModifydate(date);
         userInfo.setModifyusername(TokenManager.getUserName());

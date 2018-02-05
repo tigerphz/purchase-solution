@@ -2,15 +2,16 @@
          xsi:noNamespaceSchemaLocation="http://ehcache.org/ehcache.xsd">
     <!-- 指定一个文件目录，当EHCache把数据写到硬盘上时，将把数据写到这个文件目录下 -->
     <diskStore path="java.io.tmpdir/ehcache"/>
-    <!-- 设定缓存的默认数据过期策略 -->
-    <cache name="purchase" overflowToDisk="false" timeToIdleSeconds="60" timeToLiveSeconds="120"
+    <!-- 用户缓存-->
+    <cache name="userCache" overflowToDisk="false" timeToIdleSeconds="600" timeToLiveSeconds="1200"
            maxElementsInMemory="10000"/>
+    <!-- 设定缓存的默认数据过期策略 -->
     <defaultCache
             maxElementsInMemory="10000"
             eternal="false"
             overflowToDisk="false"
-            timeToIdleSeconds="60"
-            timeToLiveSeconds="120"
+            timeToIdleSeconds="600"
+            timeToLiveSeconds="1200"
             diskPersistent="false"
             memoryStoreEvictionPolicy="LRU"
             diskExpiryThreadIntervalSeconds="120"/>
