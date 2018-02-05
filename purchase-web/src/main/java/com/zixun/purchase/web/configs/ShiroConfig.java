@@ -64,9 +64,8 @@ public class ShiroConfig {
         logger.info("shiro已经加载");
 
         DefaultWebSecurityManager manager = new DefaultWebSecurityManager();
-        manager.setRealm(authRealm);
-
         manager.setCacheManager(ehCacheManager);
+        manager.setRealm(authRealm);
 
         //关闭shiro自带的session，详情见文档
         //http://shiro.apache.org/session-management.html#SessionManagement-StatelessApplications%28Sessionless%29
@@ -94,7 +93,7 @@ public class ShiroConfig {
      * @return
      */
     @Bean(name = "authRealm")
-    public AuthRealm authRealm() {
+    public AuthRealm authRealm(@Qualifier("ehCacheManager") EhCacheManager ehCacheManager) {
         AuthRealm authRealm = new AuthRealm();
         //认证缓存
         authRealm.setAuthenticationCacheName(StaticConfig.AUTHENTICATIONCACHE_NAME);
@@ -103,11 +102,9 @@ public class ShiroConfig {
         //授权缓存
         authRealm.setAuthorizationCacheName(StaticConfig.AUTHORIZATIONCACHE_NAME);
         authRealm.setAuthorizationCachingEnabled(true);
-        return authRealm;
-    }
 
-    @Bean
-    public LifecycleBeanPostProcessor lifecycleBeanPostProcessor() {
-        return new LifecycleBeanPostProcessor();
+        authRealm.setCacheManager(ehCacheManager);
+
+        return authRealm;
     }
 }
