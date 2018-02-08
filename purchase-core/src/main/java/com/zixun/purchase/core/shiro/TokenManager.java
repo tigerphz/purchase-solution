@@ -1,10 +1,8 @@
 package com.zixun.purchase.core.shiro;
 
 import com.zixun.purchase.model.UserInfo;
-import com.zixun.purchase.utils.jwt.JwtUtil;
 import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.authc.UsernamePasswordToken;
-import org.apache.shiro.session.Session;
+import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 
 /**
  * @description:
@@ -59,4 +57,11 @@ public class TokenManager {
         SecurityUtils.getSubject().logout();
     }
 
+    /**
+     * 清除授权缓存
+     */
+    public static void ClearAuthorizationCache() {
+        DefaultWebSecurityManager manager = (DefaultWebSecurityManager) SecurityUtils.getSecurityManager();
+        manager.getCacheManager().getCache(StaticConfig.AUTHORIZATIONCACHE_NAME).clear();
+    }
 }
