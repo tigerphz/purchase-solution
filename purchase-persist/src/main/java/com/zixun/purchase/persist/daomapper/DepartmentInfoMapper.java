@@ -1,8 +1,9 @@
 package com.zixun.purchase.persist.daomapper;
 
-import com.github.pagehelper.Page;
 import com.zixun.purchase.model.DepartmentInfo;
 import com.zixun.purchase.model.query.DepartmentParam;
+
+import java.util.List;
 
 public interface DepartmentInfoMapper {
     int deleteByPrimaryKey(Long id);
@@ -17,5 +18,5 @@ public interface DepartmentInfoMapper {
 
     int updateByPrimaryKey(DepartmentInfo record);
 
-    Page<DepartmentInfo> selectByCondition(DepartmentParam param);
+    List<DepartmentInfo> selectByCondition(DepartmentParam param);
 }

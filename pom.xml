@@ -46,6 +46,8 @@
         <org.mapstruct.version>1.2.0.Final</org.mapstruct.version>
         <fastjson.version>1.2.44</fastjson.version>
         <commons-lang3-version>3.7</commons-lang3-version>
+        <spring-aspects-version>5.0.3.RELEASE</spring-aspects-version>
+        <context-support-version>5.0.3.RELEASE</context-support-version>
     </properties>
 
     <dependencies>
@@ -183,6 +185,19 @@
                 <artifactId>fastjson</artifactId>
                 <version>${fastjson.version}</version>
             </dependency>
+
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-aspects</artifactId>
+                <version>${spring-aspects-version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-context-support</artifactId>
+                <version>${context-support-version}</version>
+            </dependency>
+
         </dependencies>
     </dependencyManagement>
 

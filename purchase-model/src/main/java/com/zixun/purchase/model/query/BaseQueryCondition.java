@@ -1,5 +1,7 @@
 package com.zixun.purchase.model.query;
 
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -10,12 +12,11 @@ import lombok.Setter;
  * @version: V1.0
  * @modified by:
  */
+@Data
+@EqualsAndHashCode
 public class BaseQueryCondition {
-    @Getter
-    @Setter
+
     public Integer PageNum;
 
-    @Getter
-    @Setter
     public Integer PageSize;
 }

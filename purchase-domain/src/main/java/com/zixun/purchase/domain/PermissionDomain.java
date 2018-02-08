@@ -2,6 +2,7 @@ package com.zixun.purchase.domain;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.zixun.purchase.core.shiro.TokenManager;
 import com.zixun.purchase.domain.mappers.MenuBoMapper;
 import com.zixun.purchase.model.PermissionInfo;
 import com.zixun.purchase.model.bo.MenuBO;
@@ -134,6 +135,9 @@ public class PermissionDomain {
     }
 
     public Boolean insertRolePermRelation(Long roleId, List<Long> permIds) {
+        //清理授权缓存
+        TokenManager.ClearAuthorizationCache();
+
         return permissionRepository.insertRolePermRelation(roleId, permIds);
     }
 }

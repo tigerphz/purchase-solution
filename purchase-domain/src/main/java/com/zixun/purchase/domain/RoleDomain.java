@@ -2,6 +2,7 @@ package com.zixun.purchase.domain;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.zixun.purchase.core.shiro.TokenManager;
 import com.zixun.purchase.model.RoleInfo;
 import com.zixun.purchase.model.query.RoleParam;
 import com.zixun.purchase.persist.daorepository.RoleRepository;
@@ -53,11 +54,15 @@ public class RoleDomain {
 
     /**
      * 插入用户角色关系表
+     *
      * @param userId
      * @param roleIds
      * @return
      */
     public Boolean insertUserRoleRelation(Long userId, List<Long> roleIds) {
+        //清理授权缓存
+        TokenManager.ClearAuthorizationCache();
+
         return roleRepository.insertUserRoleRelation(userId, roleIds);
     }
 }

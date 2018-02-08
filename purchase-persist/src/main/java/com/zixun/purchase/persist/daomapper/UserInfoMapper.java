@@ -22,5 +22,5 @@ public interface UserInfoMapper {
 
     UserInfo selectByUserName(String userName);
 
-    Page<UserInfo> selectByCondition(UserParam param);
+    List<UserInfo> selectByCondition(UserParam param);
 }
