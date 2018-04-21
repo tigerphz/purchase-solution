@@ -1,0 +1,208 @@
+-- MySQL dump 10.13  Distrib 5.7.21, for Linux (x86_64)
+--
+-- Host: localhost    Database: purchase
+-- ------------------------------------------------------
+-- Server version	5.7.21-0ubuntu0.16.04.1
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `t_department`
+--
+
+DROP TABLE IF EXISTS `t_department`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `t_department` (
+  `id` bigint(20) NOT NULL,
+  `deptname` varchar(50) NOT NULL,
+  `status` int(11) DEFAULT '0',
+  `description` varchar(200) DEFAULT NULL,
+  `parentid` bigint(20) DEFAULT NULL,
+  `createdate` datetime DEFAULT NULL,
+  `createusername` varchar(50) DEFAULT NULL,
+  `modifydate` datetime DEFAULT NULL,
+  `modifyusername` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `t_department`
+--
+
+LOCK TABLES `t_department` WRITE;
+/*!40000 ALTER TABLE `t_department` DISABLE KEYS */;
+/*!40000 ALTER TABLE `t_department` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `t_permission`
+--
+
+DROP TABLE IF EXISTS `t_permission`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `t_permission` (
+  `id` bigint(20) NOT NULL,
+  `permname` varchar(50) NOT NULL,
+  `status` int(11) DEFAULT '0',
+  `description` varchar(200) DEFAULT NULL,
+  `type` int(11) NOT NULL DEFAULT '0',
+  `icon` varchar(50) DEFAULT NULL,
+  `sort` int(11) DEFAULT NULL,
+  `parentid` bigint(20) DEFAULT NULL,
+  `url` varchar(200) DEFAULT NULL,
+  `code` varchar(200) DEFAULT NULL,
+  `createdate` datetime DEFAULT NULL,
+  `createusername` varchar(50) DEFAULT NULL,
+  `modifydate` datetime DEFAULT NULL,
+  `modifyusername` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `t_permission`
+--
+
+LOCK TABLES `t_permission` WRITE;
+/*!40000 ALTER TABLE `t_permission` DISABLE KEYS */;
+INSERT INTO `t_permission` VALUES (437399842247933952,'系统管理',0,'系统管理菜单',0,NULL,1,NULL,NULL,NULL,'2018-04-21 23:50:49','admin','2018-04-21 23:50:49','admin'),(437400300442091520,'用户列表',0,'用户列表页面',1,NULL,1,437399842247933952,'api/users/list','user:view','2018-04-21 23:52:38','admin','2018-04-21 23:52:38','admin'),(437401014744645632,'用户列表查询',0,'用户列表查询按钮',2,NULL,1,437400300442091520,'api/users/list','user:view','2018-04-21 23:55:28','admin','2018-04-22 00:07:35','admin'),(437401301752479744,'用户列表添加',0,'用户列表添加按钮',2,NULL,2,437400300442091520,'api/users/add','user:add','2018-04-21 23:56:37','admin','2018-04-21 23:56:50','admin'),(437402290014388224,'用户列表修改',0,'用户列表修改按钮',2,NULL,3,437400300442091520,'api/users/update','user:update','2018-04-22 00:00:32','admin','2018-04-22 00:03:23','admin'),(437402961132388352,'用户列表删除',0,'用户列表删除按钮',2,NULL,4,437400300442091520,'api/users/status','user:status','2018-04-22 00:03:12','admin','2018-04-22 00:03:12','admin'),(437403595726389248,'角色列表',0,'角色列表页面',1,NULL,2,437399842247933952,'api/roles/list','role:view','2018-04-22 00:05:44','admin','2018-04-22 00:05:44','admin'),(437404022899474432,'角色列表查询',0,'角色列表查询按钮',2,NULL,1,437403595726389248,'api/roles/list','role:view','2018-04-22 00:07:26','admin','2018-04-22 00:07:26','admin'),(437404341490417664,'角色列表添加',0,'角色列表添加按钮',2,NULL,2,437403595726389248,'api/roles/add','role:add','2018-04-22 00:08:42','admin','2018-04-22 00:11:16','admin'),(437404513532379136,'角色列表修改',0,'权限列表修改按钮',2,NULL,3,437403595726389248,'api/roles/update','role:update','2018-04-22 00:09:23','admin','2018-04-22 00:09:23','admin'),(437404780428525568,'角色列表删除',0,'角色列表删除按钮',2,NULL,4,437403595726389248,'api/roles/status','role:status','2018-04-22 00:10:26','admin','2018-04-22 00:11:25','admin'),(437405750973693952,'角色列表权限设置',0,'角色列表权限设置按钮',2,NULL,5,437403595726389248,'api/roles/updateUserRoles','role:permissions','2018-04-22 00:14:18','admin','2018-04-22 00:14:18','admin'),(437406171196817408,'权限列表',0,'权限列表页面',1,NULL,3,437399842247933952,'api/permissions/list','permission:view','2018-04-22 00:15:58','admin','2018-04-22 00:15:58','admin'),(437406789231706112,'权限列表查询',0,'权限列表查询按钮',2,NULL,1,437406171196817408,'api/permissions/list','permission:view','2018-04-22 00:18:25','admin','2018-04-22 00:18:25','admin'),(437406990021427200,'权限列表添加',0,'权限列表添加按钮',2,NULL,2,437406171196817408,'api/permissions/add','permission:add','2018-04-22 00:19:13','admin','2018-04-22 00:19:13','admin'),(437407167088164864,'权限列表修改',0,'权限列表修改按钮',2,NULL,3,437406171196817408,'api/permissions/update','permission:update','2018-04-22 00:19:55','admin','2018-04-22 00:19:55','admin'),(437407358210015232,'权限列表删除',0,'权限列表删除按钮',2,NULL,4,437406171196817408,'api/permissions/status','permission:status','2018-04-22 00:20:41','admin','2018-04-22 00:20:41','admin'),(437407618592407552,'权限列表刷新权限',0,'权限列表刷新权限按钮',2,NULL,5,437406171196817408,'api/permissions/flashPerms','permission:flashPerms','2018-04-22 00:21:43','admin','2018-04-22 00:21:43','admin');
+/*!40000 ALTER TABLE `t_permission` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `t_role`
+--
+
+DROP TABLE IF EXISTS `t_role`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `t_role` (
+  `id` bigint(20) NOT NULL,
+  `rolename` varchar(50) NOT NULL,
+  `status` int(11) DEFAULT '0',
+  `description` varchar(200) DEFAULT NULL,
+  `createdate` datetime DEFAULT NULL,
+  `createusername` varchar(50) DEFAULT NULL,
+  `modifydate` datetime DEFAULT NULL,
+  `modifyusername` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `t_role`
+--
+
+LOCK TABLES `t_role` WRITE;
+/*!40000 ALTER TABLE `t_role` DISABLE KEYS */;
+INSERT INTO `t_role` VALUES (403944351954108417,'系统管理员',1,'系统管理员','2018-03-29 03:15:41','admin','2018-03-29 03:15:48','admin');
+/*!40000 ALTER TABLE `t_role` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `t_role_permission`
+--
+
+DROP TABLE IF EXISTS `t_role_permission`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `t_role_permission` (
+  `roleid` bigint(20) DEFAULT NULL,
+  `permid` bigint(20) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `t_role_permission`
+--
+
+LOCK TABLES `t_role_permission` WRITE;
+/*!40000 ALTER TABLE `t_role_permission` DISABLE KEYS */;
+INSERT INTO `t_role_permission` VALUES (403944351954108417,437401014744645632),(403944351954108417,437401301752479744),(403944351954108417,437402290014388224),(403944351954108417,437402961132388352),(403944351954108417,437404022899474432),(403944351954108417,437404341490417664),(403944351954108417,437404513532379136),(403944351954108417,437404780428525568),(403944351954108417,437405750973693952),(403944351954108417,437406789231706112),(403944351954108417,437406990021427200),(403944351954108417,437407167088164864),(403944351954108417,437407358210015232),(403944351954108417,437407618592407552);
+/*!40000 ALTER TABLE `t_role_permission` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `t_user`
+--
+
+DROP TABLE IF EXISTS `t_user`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `t_user` (
+  `id` bigint(20) NOT NULL,
+  `username` varchar(50) NOT NULL,
+  `nickname` varchar(50) DEFAULT NULL,
+  `passwordhash` varchar(50) NOT NULL,
+  `passwordsalt` varchar(50) NOT NULL,
+  `gender` int(11) DEFAULT NULL,
+  `status` int(11) DEFAULT '0',
+  `cellphone` varchar(20) DEFAULT NULL,
+  `identitycard` varchar(30) DEFAULT NULL,
+  `email` varchar(20) DEFAULT NULL,
+  `qq` varchar(20) DEFAULT NULL,
+  `address` varchar(100) DEFAULT NULL,
+  `deptid` bigint(20) DEFAULT NULL,
+  `createdate` datetime DEFAULT NULL,
+  `createusername` varchar(50) DEFAULT NULL,
+  `modifydate` datetime DEFAULT NULL,
+  `modifyusername` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `t_user`
+--
+
+LOCK TABLES `t_user` WRITE;
+/*!40000 ALTER TABLE `t_user` DISABLE KEYS */;
+INSERT INTO `t_user` VALUES (403944351954108416,'admin','系统管理员','de8851b65b0b703a341acc25087eeb3c','d133c9a9-525a-4128-88fc-1665f552b31d',1,0,'15871599999',NULL,'191130000@qq.com',NULL,NULL,NULL,'2018-03-29 03:15:41','admin','2018-04-22 00:33:25','admin');
+/*!40000 ALTER TABLE `t_user` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `t_user_role`
+--
+
+DROP TABLE IF EXISTS `t_user_role`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `t_user_role` (
+  `userid` bigint(20) DEFAULT NULL,
+  `roleid` bigint(20) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `t_user_role`
+--
+
+LOCK TABLES `t_user_role` WRITE;
+/*!40000 ALTER TABLE `t_user_role` DISABLE KEYS */;
+INSERT INTO `t_user_role` VALUES (403944351954108416,403944351954108417);
+/*!40000 ALTER TABLE `t_user_role` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2018-04-22  0:39:08
