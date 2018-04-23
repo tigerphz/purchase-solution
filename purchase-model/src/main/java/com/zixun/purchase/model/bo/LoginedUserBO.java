@@ -1,7 +1,5 @@
 package com.zixun.purchase.model.bo;
 
-import com.zixun.purchase.model.PermissionInfo;
-import com.zixun.purchase.model.RoleInfo;
 import lombok.Data;
 
 import java.util.List;
