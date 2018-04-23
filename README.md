@@ -12,7 +12,7 @@ docs\sql\create-scripts 路径下保存了创建表的脚本
 purchase_data.txt 文件为mysql导出的表结构跟数据文件 
 修改对于的数据库连接账号密码后直接启动程序就可以了。
 
-##界面截图
+## 界面截图
 ![img](http://lc-gjllsjil.cn-n1.lcfile.com/450e3f1531d510ccdfa5.jpg)
 
 ![img](http://lc-gjllsjil.cn-n1.lcfile.com/813fdde825d7d2fb429d.jpg)
