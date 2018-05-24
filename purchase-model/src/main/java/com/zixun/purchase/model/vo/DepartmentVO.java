@@ -2,6 +2,7 @@ package com.zixun.purchase.model.vo;
 
 import lombok.Data;
 
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 /**
@@ -15,6 +16,7 @@ import java.util.Date;
 public class DepartmentVO {
     private Long id;
 
+    @NotNull(message = "部门名不能为空")
     private String deptname;
 
     private Integer status;

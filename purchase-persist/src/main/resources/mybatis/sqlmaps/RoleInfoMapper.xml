@@ -6,13 +6,14 @@
         <result column="rolename" jdbcType="VARCHAR" property="rolename"/>
         <result column="status" jdbcType="INTEGER" property="status"/>
         <result column="description" jdbcType="VARCHAR" property="description"/>
+        <result column="deptid" jdbcType="BIGINT" property="deptid"/>
         <result column="createdate" jdbcType="TIMESTAMP" property="createdate"/>
         <result column="createusername" jdbcType="VARCHAR" property="createusername"/>
         <result column="modifydate" jdbcType="TIMESTAMP" property="modifydate"/>
         <result column="modifyusername" jdbcType="VARCHAR" property="modifyusername"/>
     </resultMap>
     <sql id="Base_Column_List">
-        id, rolename, status, description, createdate, createusername, modifydate, modifyusername
+        id, rolename, status, description, deptid, createdate, createusername, modifydate, modifyusername
     </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
         select
@@ -26,10 +27,10 @@
     </delete>
     <insert id="insert" parameterType="com.zixun.purchase.model.RoleInfo">
         INSERT INTO t_role (id, rolename, status,
-                            description, createdate, createusername,
+                            description, deptid, createdate, createusername,
                             modifydate, modifyusername)
         VALUES (#{id,jdbcType=BIGINT}, #{rolename,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER},
-                #{description,jdbcType=VARCHAR}, #{createdate,jdbcType=TIMESTAMP}, #{createusername,jdbcType=VARCHAR},
+                #{description,jdbcType=VARCHAR}, #{deptid,jdbcType=BIGINT}, #{createdate,jdbcType=TIMESTAMP}, #{createusername,jdbcType=VARCHAR},
                 #{modifydate,jdbcType=TIMESTAMP}, #{modifyusername,jdbcType=VARCHAR})
     </insert>
     <insert id="insertSelective" parameterType="com.zixun.purchase.model.RoleInfo">
@@ -46,6 +47,9 @@
             </if>
             <if test="description != null">
                 description,
+            </if>
+            <if test="deptid != null">
+                deptid,
             </if>
             <if test="createdate != null">
                 createdate,
@@ -73,6 +77,9 @@
             <if test="description != null">
                 #{description,jdbcType=VARCHAR},
             </if>
+            <if test="deptid != null">
+                #{deptid,jdbcType=BIGINT},
+            </if>
             <if test="createdate != null">
                 #{createdate,jdbcType=TIMESTAMP},
             </if>
@@ -99,6 +106,9 @@
             <if test="description != null">
                 description = #{description,jdbcType=VARCHAR},
             </if>
+            <if test="deptid != null">
+                deptid = #{deptid,jdbcType=BIGINT},
+            </if>
             <if test="createdate != null">
                 createdate = #{createdate,jdbcType=TIMESTAMP},
             </if>
@@ -119,6 +129,7 @@
         SET rolename       = #{rolename,jdbcType=VARCHAR},
             status         = #{status,jdbcType=INTEGER},
             description    = #{description,jdbcType=VARCHAR},
+            deptid         = #{deptid,jdbcType=BIGINT},
             createdate     = #{createdate,jdbcType=TIMESTAMP},
             createusername = #{createusername,jdbcType=VARCHAR},
             modifydate     = #{modifydate,jdbcType=TIMESTAMP},
@@ -140,6 +151,9 @@
             </if>
             <if test="description != null and description != ''">
                 and description = #{description,jdbcType=VARCHAR}
+            </if>
+            <if test="deptid != null">
+                and deptid = #{deptid,jdbcType=BIGINT}
             </if>
         </where>
     </select>

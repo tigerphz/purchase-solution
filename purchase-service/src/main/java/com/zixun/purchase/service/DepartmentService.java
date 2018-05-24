@@ -26,4 +26,8 @@ public class DepartmentService {
     public PageInfo<DepartmentInfo> selectByCondition(DepartmentParam param) {
         return departmentDomain.selectByCondition(param);
     }
+
+    public boolean updateByPrimaryKeySelective(DepartmentInfo record) {
+        return departmentDomain.updateByPrimaryKeySelective(record);
+    }
 }

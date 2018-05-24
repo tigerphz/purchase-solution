@@ -5,7 +5,7 @@ CREATE TABLE t_role
   rolename       VARCHAR(50) NOT NULL, #名称
   status         INTEGER DEFAULT 0, #状态
   description    VARCHAR(200),
-
+  deptid         BIGINT, #部门ID
   createdate     DATETIME,
   createusername VARCHAR(50),
   modifydate     DATETIME,

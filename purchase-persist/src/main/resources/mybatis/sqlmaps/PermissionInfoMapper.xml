@@ -261,7 +261,7 @@
         SELECT p.*
         FROM t_permission p
             INNER JOIN t_role_permission rp ON p.id = rp.permid
-            INNER JOIN t_role r ON rp.roleid = r.id
+            LEFT JOIN t_role r ON rp.roleid = r.id
         WHERE r.id = #{roleId,jdbcType=BIGINT}
     </select>
 

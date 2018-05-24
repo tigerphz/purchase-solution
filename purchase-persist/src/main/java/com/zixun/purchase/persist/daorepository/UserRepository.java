@@ -25,44 +25,34 @@ public class UserRepository {
     @Autowired
     private UserInfoMapper userInfoMapper;
 
-    @CacheEvict
     public boolean deleteByPrimaryKey(Long id) {
         return userInfoMapper.deleteByPrimaryKey(id) > 0;
     }
 
-    @CacheEvict
-    @CachePut(key = "#record.id")
     public boolean insert(UserInfo record) {
         return userInfoMapper.insert(record) > 0;
     }
 
-    @CacheEvict
     public boolean insertSelective(UserInfo record) {
         return userInfoMapper.insertSelective(record) > 0;
     }
 
-    @Cacheable(key = "#id")
     public UserInfo selectByPrimaryKey(Long id) {
         return userInfoMapper.selectByPrimaryKey(id);
     }
 
-    @CacheEvict
     public boolean updateByIdSelective(UserInfo record) {
         return userInfoMapper.updateByPrimaryKeySelective(record) > 0;
     }
 
-    @CacheEvict
-    @CachePut(key = "#record.id")
     public boolean updateByPrimaryKey(UserInfo record) {
         return userInfoMapper.updateByPrimaryKey(record) > 0;
     }
 
-    @Cacheable(key = "#userName")
     public UserInfo selectByUserName(String userName) {
         return userInfoMapper.selectByUserName(userName);
     }
 
-    @Cacheable
     public List<UserInfo> selectByCondition(UserParam param) {
         return userInfoMapper.selectByCondition(param);
     }

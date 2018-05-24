@@ -15,5 +15,9 @@ import lombok.EqualsAndHashCode;
 public class DepartmentParam extends BaseQueryCondition {
     private String deptname;
 
+    private String description;
+
     private Integer status;
+
+    private Integer parentid;
 }

@@ -36,4 +36,8 @@ public class DepartmentDomain {
 
         return departmentInfoPageInfo;
     }
+
+    public boolean updateByPrimaryKeySelective(DepartmentInfo record) {
+        return departmentRepository.updateByPrimaryKeySelective(record);
+    }
 }

@@ -11,6 +11,8 @@ public class RoleInfo {
 
     private String description;
 
+    private Long deptid;
+
     private Date createdate;
 
     private String createusername;
@@ -49,6 +51,14 @@ public class RoleInfo {
 
     public void setDescription(String description) {
         this.description = description == null ? null : description.trim();
+    }
+
+    public Long getDeptid() {
+        return deptid;
+    }
+
+    public void setDeptid(Long deptid) {
+        this.deptid = deptid;
     }
 
     public Date getCreatedate() {

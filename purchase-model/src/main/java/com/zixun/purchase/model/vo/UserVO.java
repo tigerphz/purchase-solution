@@ -31,6 +31,8 @@ public class UserVO {
 
     private String cellphone;
 
+    private Long deptid;
+
     private String identitycard;
 
     private String fax;

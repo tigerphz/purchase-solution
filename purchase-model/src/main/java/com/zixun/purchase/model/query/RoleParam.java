@@ -18,4 +18,6 @@ public class RoleParam extends BaseQueryCondition {
     private Integer status;
 
     private String description;
+
+    private Long deptid;
 }
